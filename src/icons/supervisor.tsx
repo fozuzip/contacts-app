@@ -1,6 +1,4 @@
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number;
-}
+import type { IconProps } from "./type";
 
 export const Supervisor = ({ size = 64, ...rest }: IconProps) => {
   return (

@@ -1,6 +1,32 @@
+import { useState, useEffect } from "react";
+
+import { getContacts, type Contact } from "./api";
 import { ContactCard } from "./components/contact-card";
+import { Spinner } from "./icons/spinner";
 
 export default function App() {
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  const fetchContacts = async () => {
+    setIsLoading(true);
+    try {
+      const contacts = await getContacts();
+      setContacts(contacts);
+    } catch (error) {
+      setHasError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchContacts();
+  }, []);
+
+  console.log(contacts);
+
   return (
     <div
       className="bg-very-light-gray text-very-dark-blue flex h-full w-full flex-col
@@ -19,14 +45,25 @@ export default function App() {
             icon to open a modal and vire detailed contact info contact
           </p>
         </header>
-        <main className="desktop:grid-cols-3 desktop:grid-rows-2 grid w-full grid-cols-1 grid-rows-6  gap-6 sm:grid-cols-2 sm:grid-rows-3">
-          <ContactCard />
-          <ContactCard />
-          <ContactCard />
-          <ContactCard />
-          <ContactCard />
-          <ContactCard />
-        </main>
+        {isLoading && (
+          <main className="flex min-h-[400px] items-center justify-center">
+            <Spinner />
+          </main>
+        )}
+        {hasError && (
+          <main className="flex min-h-[400px] items-center justify-center">
+            <p className="text-grayish-blue text-2xl font-semibold">
+              Something went wrong
+            </p>
+          </main>
+        )}
+        {contacts.length > 1 && (
+          <main className="desktop:grid-cols-3 desktop:grid-rows-2 grid w-full grid-cols-1 grid-rows-6  gap-6 sm:grid-cols-2 sm:grid-rows-3">
+            {contacts.map((contact) => (
+              <ContactCard key={contact.id} contact={contact} />
+            ))}
+          </main>
+        )}
         <footer className="text-[10px]">
           Challenge by{" "}
           <a
