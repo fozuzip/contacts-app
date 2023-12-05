@@ -8,7 +8,7 @@ export default {
       },
       colors: {
         cyan: "hsl(180, 62%, 55%)",
-        "very-dark-blue": "hsl(180, 62%, 55%)",
+        "very-dark-blue": "hsl(234, 12%, 34%)",
         "grayish-blue": "hsl(229, 6%, 66%)",
         "very-light-gray": "hsl(0, 0%, 98%)",
       },
