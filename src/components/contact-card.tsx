@@ -1,11 +1,16 @@
+import { useState } from "react";
+
 import type { Contact } from "../api";
 import { Supervisor } from "../icons/supervisor";
+import { ContactModal } from "./contact-modal";
 
 interface ContactCardProps {
   contact: Contact;
 }
 
 export const ContactCard = ({ contact }: ContactCardProps) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const { name, email, company } = contact;
   return (
     <section className="border-cyan rounded-md border-t-2 bg-white px-5 py-6 shadow-lg">
@@ -19,8 +24,13 @@ export const ContactCard = ({ contact }: ContactCardProps) => {
         </p>
       </div>
       <div className="flex justify-end">
-        <Supervisor size={50} className="cursor-pointer" />
+        <Supervisor
+          size={50}
+          className="cursor-pointer"
+          onClick={() => setModalIsOpen(true)}
+        />
       </div>
+      <ContactModal open={modalIsOpen} contact={contact} onClose={() => setModalIsOpen(false)} />
     </section>
   );
 };
