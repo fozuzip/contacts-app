@@ -2,7 +2,10 @@ import { Contact } from "../api";
 import { X } from "../icons/x";
 import { Modal } from "./modal";
 
-type ContactModalProps = React.ComponentProps<typeof Modal> & {
+type ContactModalProps = Omit<
+  React.ComponentProps<typeof Modal>,
+  "children"
+> & {
   contact: Contact;
 };
 

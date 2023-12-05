@@ -25,22 +25,20 @@ export default function App() {
     fetchContacts();
   }, []);
 
-  console.log(contacts);
-
   return (
     <div
-      className="bg-very-light-gray text-very-dark-blue flex h-full w-full flex-col
-    items-center"
+      className="flex h-full w-full flex-col items-center bg-very-light-gray
+    text-very-dark-blue"
     >
-      <div className="desktop:gap-10 flex h-full w-full max-w-[1100px] flex-col items-center justify-stretch gap-8 px-6 py-10 ">
+      <div className="flex h-full w-full max-w-[1100px] flex-col items-center justify-stretch gap-8 px-6 py-10 desktop:gap-10 ">
         <header className="flex max-w-[480px] flex-col items-center">
-          <h2 className=" desktop:text-3xl pb-1 text-2xl font-extralight">
+          <h2 className=" pb-1 text-2xl font-extralight desktop:text-3xl">
             CSS, Javascript, API
           </h2>
-          <h1 className=" desktop:text-3xl pb-4 text-2xl font-semibold">
+          <h1 className=" pb-4 text-2xl font-semibold desktop:text-3xl">
             Contacts Application
           </h1>
-          <p className="text-grayish-blue text-center text-sm">
+          <p className="text-center text-sm text-grayish-blue">
             View basic info of contracts in a 3x2 layout. Click on the magnifier
             icon to open a modal and vire detailed contact info contact
           </p>
@@ -52,13 +50,13 @@ export default function App() {
         )}
         {hasError && (
           <main className="flex min-h-[400px] items-center justify-center">
-            <p className="text-grayish-blue text-2xl font-semibold">
+            <p className="text-2xl font-semibold text-grayish-blue">
               Something went wrong
             </p>
           </main>
         )}
         {contacts.length > 1 && (
-          <main className="desktop:grid-cols-3 desktop:grid-rows-2 grid w-full grid-cols-1 grid-rows-6  gap-6 sm:grid-cols-2 sm:grid-rows-3">
+          <main className="grid w-full grid-cols-1 grid-rows-6 gap-6 sm:grid-cols-2  sm:grid-rows-3 desktop:grid-cols-3 desktop:grid-rows-2">
             {contacts.map((contact) => (
               <ContactCard key={contact.id} contact={contact} />
             ))}
